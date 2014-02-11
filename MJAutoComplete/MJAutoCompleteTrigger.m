@@ -12,7 +12,7 @@
 
 - (instancetype)initWithDelimiter:(NSString *)delimiter
 {
-    return [self initWithDelimiter:delimiter];
+    return [self initWithDelimiter:delimiter autoCompleteItems:nil];
 }
 
 - (instancetype)initWithDelimiter:(NSString *)delimiter autoCompleteItems:(NSArray *)items
