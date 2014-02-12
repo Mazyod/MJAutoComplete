@@ -79,45 +79,6 @@
     [container addSubview:self.autoCompleteTC.view];
 }
 
-- (BOOL)_shouldTriggeredAutoComplete:(MJAutoCompleteTrigger *)trigger
-{
-    NSString* string = self.processingString;
-    // make sure to search backwards, since that's where the user it typing
-    NSCharacterSet *breakSet = [[NSCharacterSet letterCharacterSet] invertedSet];
-    NSRange brRange = [string rangeOfCharacterFromSet:breakSet
-                                              options:NSBackwardsSearch];
-    
-    NSRange dlRange = [string rangeOfString:trigger.delimiter options:NSBackwardsSearch];
-    // non alphanumeric breaks the autoComplete suggestions
-    if (dlRange.location != NSNotFound &&
-        (dlRange.location >= brRange.location || brRange.location == NSNotFound))
-    {
-        NSString *autoComplete = [string substringFromIndex:dlRange.location+1];
-        
-        __weak MJAutoCompleteManager *weakSelf = self;
-        MJAutoCompleteListCallback cb = ^(NSArray* list)
-        {
-            [weakSelf _updateAutoCompleteList:list forTrigger:trigger withString:autoComplete];
-        };
-        
-        if ([self.dataSource respondsToSelector:@selector(autoCompleteManager:itemListForTrigger:withString:callback:)])
-        {
-            /* get the list of items from the dataSource EVERY TIME. The user should be able given the ability to implement a heuristic if the list is empty, for example, adding an autocorrect on top of autocomplete!) */
-            [self.dataSource autoCompleteManager:self
-                              itemListForTrigger:trigger
-                                      withString:autoComplete
-                                        callback:cb];
-        }
-        else
-        {
-            cb(trigger.autoCompleteItemList);
-        }
-        
-        return YES;
-    }
-    return NO;
-}
-
 /* Update the AutoCompleteItems list with new items using the dataSource to filter, or apply simple filter */
 - (void)_updateAutoCompleteList:(NSArray *)list forTrigger:(MJAutoCompleteTrigger *)trigger withString:(NSString *)string
 {
@@ -130,7 +91,7 @@
     }
     else
     {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"autoCompleteString contains[c] %@", string];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"autoCompleteString contains[cd] %@", string];
         [filteredList filterUsingPredicate:predicate];
     }
     [_autoCompleteTC setContents:filteredList];
@@ -154,17 +115,39 @@
 - (void)processString:(NSString *)string
 {
     self.processingString = string;
-    // string to be autoCompleted
     BOOL didTriggerAutoComplete = NO;
+    // iterate the triggers, note how the order is significant
     for (MJAutoCompleteTrigger* trigger in self.triggerSet)
     {
-        didTriggerAutoComplete = [self _shouldTriggeredAutoComplete:trigger];
-        if (didTriggerAutoComplete)
+        NSString *substring = [trigger substringToBeAutoCompletedInString:self.processingString];
+        // if the trigger found a string to be autoCompleted
+        if (substring)
         {
+            // let's inform the delegate and update the list
+             __weak MJAutoCompleteManager *weakSelf = self;
+            MJAutoCompleteListCallback cb = ^(NSArray *list)
+            {
+                [weakSelf _updateAutoCompleteList:list forTrigger:trigger withString:autoComplete];
+            };
+            
+            if ([self.dataSource respondsToSelector:@selector(autoCompleteManager:itemListForTrigger:withString:callback:)])
+            {
+                /* get the list of items from the dataSource EVERY TIME. The user should be able given the ability to implement a heuristic if the list is empty, for example, adding an autocorrect on top of autocomplete!) */
+                [self.dataSource autoCompleteManager:self
+                                  itemListForTrigger:trigger
+                                          withString:autoComplete
+                                            callback:cb];
+            }
+            else
+            {
+                cb(trigger.autoCompleteItemList);
+            }
+
+            didTriggerAutoComplete = YES;
             break;
         }
     }
-    
+    // if there was no trigger invoked, get rid of the tableview
     if (!didTriggerAutoComplete)
     {
         [self.autoCompleteTC setContents:nil];

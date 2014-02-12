@@ -26,6 +26,15 @@
     itemListForTrigger:. If that method is implemented, it has higher
     priorty, and will be called. You can simply return trigger.list if
     you only want to customize one trigger.
+
+    IMPORTANT:
+    ==========
+
+        Assining an empty string as the delimiter will cause the 
+    component to act as a general purpose search autoComplete engine. 
+    For example, if the user types, "I like turtles", an autoComplete
+    string will be fetched based on the WHOLE string. Hence, we get:
+    "You are a great Zombie".
  
  */
 
@@ -37,5 +46,8 @@
 
 - (instancetype)initWithDelimiter:(NSString *)delimiter;
 - (instancetype)initWithDelimiter:(NSString *)delimiter autoCompleteItems:(NSArray*)items;
+
+/* get the string that fires this trigger, or nil if none */
+- (NSString *)substringToBeAutoCompletedInString:(NSString *)string;
 
 @end

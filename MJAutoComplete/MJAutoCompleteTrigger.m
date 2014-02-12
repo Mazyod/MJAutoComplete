@@ -25,6 +25,31 @@
     }
     return self;
 }
+
+- (NSString *)substringToBeAutoCompletedInString:(NSString *)string
+{
+    // short circuit for an empty delimiter string
+    if (!self.delimiter.count)
+    {
+        return string;
+    }
+
+    // make sure to search backwards, since that's where the user it typing
+    NSCharacterSet *breakSet = [[NSCharacterSet letterCharacterSet] invertedSet];
+    NSRange brRange = [string rangeOfCharacterFromSet:breakSet
+                                              options:NSBackwardsSearch];
+    
+    NSRange dlRange = [string rangeOfString:trigger.delimiter options:NSBackwardsSearch];
+    // non alphanumeric breaks the autoComplete suggestions
+    if (dlRange.location != NSNotFound &&
+        (dlRange.location >= brRange.location || brRange.location == NSNotFound))
+    {
+        return [string substringFromIndex:dlRange.location+1];
+    }
+
+    return nil;
+}
+
 /* Implement isEqual to help the NSSet make sure the triggers are unique */
 - (BOOL)isEqual:(id)object
 {
