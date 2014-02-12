@@ -51,7 +51,7 @@
                 dlRange = NSMakeRange(0, weakSelf.processingString.length);
             }
 
-            NSString* prevString = [weakSelf.processingString substringToIndex:dlRange.location+1];
+            NSString* prevString = [weakSelf.processingString substringToIndex:dlRange.location+delimiter.length];
             NSString* newString = [NSString stringWithFormat:@"%@%@ ", prevString, autoCompleteString];
             
             [weakSelf.delegate autoCompleteManager:weakSelf shouldUpdateToText:newString];
