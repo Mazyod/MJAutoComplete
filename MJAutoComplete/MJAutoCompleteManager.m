@@ -46,7 +46,11 @@
             NSString* delimiter = weakSelf.currentTrigger.delimiter;
             
             NSRange dlRange = [weakSelf.processingString rangeOfString:delimiter options:NSBackwardsSearch];
-            
+            if (!delimiter.length)
+            {
+                dlRange = NSMakeRange(0, weakSelf.processingString.length);
+            }
+
             NSString* prevString = [weakSelf.processingString substringToIndex:dlRange.location+1];
             NSString* newString = [NSString stringWithFormat:@"%@%@ ", prevString, autoCompleteString];
             
