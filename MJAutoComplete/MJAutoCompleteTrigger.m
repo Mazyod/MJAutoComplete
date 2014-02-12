@@ -29,7 +29,7 @@
 - (NSString *)substringToBeAutoCompletedInString:(NSString *)string
 {
     // short circuit for an empty delimiter string
-    if (!self.delimiter.count)
+    if (!self.delimiter.length)
     {
         return string;
     }
@@ -39,7 +39,7 @@
     NSRange brRange = [string rangeOfCharacterFromSet:breakSet
                                               options:NSBackwardsSearch];
     
-    NSRange dlRange = [string rangeOfString:trigger.delimiter options:NSBackwardsSearch];
+    NSRange dlRange = [string rangeOfString:self.delimiter options:NSBackwardsSearch];
     // non alphanumeric breaks the autoComplete suggestions
     if (dlRange.location != NSNotFound &&
         (dlRange.location >= brRange.location || brRange.location == NSNotFound))
