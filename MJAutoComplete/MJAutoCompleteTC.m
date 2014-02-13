@@ -34,6 +34,7 @@
 {
     [super viewDidLoad];
     
+    [self.tableView setBackgroundColor:[UIColor whiteColor]];
     [self.tableView registerClass:[MJAutoCompleteCell class] forCellReuseIdentifier:@"AutoCompleteCell"];
     [self.tableView setHidden:self.contents == nil];
     // make sure the table view fits the container
