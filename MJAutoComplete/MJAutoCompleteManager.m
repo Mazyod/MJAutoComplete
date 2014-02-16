@@ -155,7 +155,7 @@
     // if there was no trigger invoked, get rid of the tableview
     if (!didTriggerAutoComplete)
     {
-        [self.autoCompleteTC setContents:nil];
+        [_autoCompleteTC showAutoCompleteItems:nil reversed:NO];
     }
 }
 
