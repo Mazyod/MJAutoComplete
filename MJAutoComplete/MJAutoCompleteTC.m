@@ -72,7 +72,7 @@ const CGFloat MJAutoCompleteTCCellHeight = 44.f;
         }
         else
         {
-            self.tableView.frame = self.tableView.superview.frame;
+            self.tableView.frame = self.tableView.superview.bounds;
         }
     }
 
