@@ -15,10 +15,12 @@ typedef void(^MJAutoCompleteTCDisplayHandler)(MJAutoCompleteItem *displayedItem)
 typedef void(^MJAutoCompleteTCSelectionHandler)(MJAutoCompleteItem *selectedItem);
 
 @interface MJAutoCompleteTC : UITableViewController
-/* The contents of this table view is expected to be an array of NSStrings */
-@property (strong, nonatomic) NSArray* contents;
+/* The contents of this table view is expected to be an array of MJAutoCompleteItems */
+@property (readonly, nonatomic) NSArray* contents;
 
 - (instancetype)initWithDisplayHandler:(MJAutoCompleteTCDisplayHandler)display
                       selectionHandler:(MJAutoCompleteTCSelectionHandler)selection;
+
+- (void)showAutoCompleteItems:(NSArray *)items reversed:(BOOL)reverse;
 
 @end

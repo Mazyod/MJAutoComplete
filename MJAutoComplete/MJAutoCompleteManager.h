@@ -79,12 +79,17 @@ typedef void(^MJAutoCompleteListCallback)(NSArray* list);
 @class MJAutoCompleteTC;
 @interface MJAutoCompleteManager : NSObject
 
+/**** COMPONENT SETUP ****/
 @property (weak, nonatomic) IBOutlet id<MJAutoCompleteManagerDataSource> dataSource;
 @property (weak, nonatomic) IBOutlet id<MJAutoCompleteManagerDelegate> delegate;
-/* Only for checking what triggers were added. Use -addAutoCompleteDelimiter: and removeAutoCompleteDelimiter: to indirectly manipulate the array */
-@property (readonly, nonatomic) NSSet* triggers;
 /* The container must be set so the auto complete manager knows where to position it's table view. The table view will have an autoresizing mask of flexible width | flexible height to change with the container. */
 @property (weak, nonatomic) IBOutlet UIView* container;
+
+/**** COMPONENT CUSTOMIZATION ****/
+/* Only for checking what triggers were added. Use -addAutoCompleteDelimiter: and removeAutoCompleteDelimiter: to indirectly manipulate the array */
+@property (readonly, nonatomic) NSSet* triggers;
+/* Ability to reverse autocomplete table scroll direction */
+@property (nonatomic, getter=isScrollDirectionReversed) BOOL scrollDirectionReversed;
 /* Use explicit methods to add and remove delimiters to enforce type checking and protect the internal mutable array. */
 - (void)addAutoCompleteTrigger:(MJAutoCompleteTrigger *)trigger;
 - (void)removeAutoCompleteTrigger:(MJAutoCompleteTrigger *)trigger;

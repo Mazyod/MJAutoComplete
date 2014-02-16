@@ -9,6 +9,8 @@
 #import "MJAutoCompleteTC.h"
 #import "MJAutoCompleteCell.h"
 
+const CGFloat MJAutoCompleteTCCellHeight = 44.f;
+
 @interface MJAutoCompleteTC ()
 
 @property (copy, nonatomic) MJAutoCompleteTCDisplayHandler displayHandler;
@@ -41,15 +43,37 @@
     [self.tableView setAutoresizingMask:(UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth)];
 }
 
-- (void)setContents:(NSArray *)contents
+- (void)showAutoCompleteItems:(NSArray *)items reversed:(BOOL)reverse
 {
-    _contents = contents;
-    // do not load the view unecessarily.
-    if (self.isViewLoaded)
-    {        
-        [self.tableView setHidden:self.contents == nil];
-        [self.tableView reloadData];
+    if (!reverse)
+    {
+        _contents = items;
     }
+    else
+    {
+        /* First, reverse the model we got */
+        NSMutableArray *reversed = [NSMutableArray arrayWithCapacity:items.count];
+        for (id obj in items.reverseObjectEnumerator)
+        {
+            [reversed addObject:obj];
+        }
+        _contents = reversed;
+        /* Then, let's adjust the tableView */
+        /* 1 - if the frame of the table is smaller than the container, position it at the bottom */
+        CGFloat contentHeight = MJAutoCompleteTCCellHeight * [items count];
+        if (contentHeight < CGRectGetHeight(self.tableView.superview.bounds))
+        {
+            CGRect frame = self.tableView.frame;
+            frame.origin.y = CGRectGetHeight(self.tableView.superview.bounds) - contentHeight;
+            frame.size.height = contentHeight;
+
+            self.tableView.frame = frame;
+            self.tableView.scrollEnabled = NO;
+        }
+    }
+
+    [self.tableView setHidden:self.contents == nil];
+    [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source -

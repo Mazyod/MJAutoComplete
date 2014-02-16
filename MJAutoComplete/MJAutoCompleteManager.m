@@ -136,7 +136,7 @@
             
             if ([self.dataSource respondsToSelector:@selector(autoCompleteManager:itemListForTrigger:withString:callback:)])
             {
-                /* get the list of items from the dataSource EVERY TIME. The user should be able given the ability to implement a heuristic if the list is empty, for example, adding an autocorrect on top of autocomplete!) */
+                /* get the list of items from the dataSource EVERY TIME. The user should be given the ability to implement a heuristic if the list is empty, for example, adding an autocorrect on top of autocomplete!) */
                 [self.dataSource autoCompleteManager:self
                                   itemListForTrigger:trigger
                                           withString:substring
