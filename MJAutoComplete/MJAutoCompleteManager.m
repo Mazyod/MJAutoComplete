@@ -99,6 +99,11 @@
         [filteredList filterUsingPredicate:predicate];
     }
 
+    if ([self.delegate respondsToSelector:@selector(autoCompleteManagerViewWillAppear:)])
+    {
+        [self.delegate autoCompleteManagerViewWillAppear:self];
+    }
+
     [_autoCompleteTC showAutoCompleteItems:filteredList reversed:self.isScrollDirectionReversed];
 }
 
@@ -155,6 +160,11 @@
     // if there was no trigger invoked, get rid of the tableview
     if (!didTriggerAutoComplete)
     {
+        if ([self.delegate respondsToSelector:@selector(autoCompleteManagerViewWillDisappear:)])
+        {
+            [self.delegate autoCompleteManagerViewWillDisappear:self];
+        }
+
         [_autoCompleteTC showAutoCompleteItems:nil reversed:NO];
     }
 }

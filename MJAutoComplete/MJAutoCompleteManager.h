@@ -45,6 +45,9 @@ typedef void(^MJAutoCompleteListCallback)(NSArray* list);
 /* For the sake of lazy loading, we notify the delegate when an autoComplete item will be presented, so the developer can postpone fetching the image until the item is actually going to be presented to the user. */
 - (void)autoCompleteManager:(MJAutoCompleteManager *)acManager
             willPresentItem:(MJAutoCompleteItem *)item;
+/* Additional delegate methods when the autoComplete view will (dis)appear. */
+- (void)autoCompleteManagerViewWillAppear:(MJAutoCompleteManager *)acManager;
+- (void)autoCompleteManagerViewWillDisappear:(MJAutoCompleteManager *)acManager;
 
 @end
 
