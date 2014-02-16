@@ -73,11 +73,20 @@ const CGFloat MJAutoCompleteTCCellHeight = 44.f;
         else
         {
             self.tableView.frame = self.tableView.superview.bounds;
+            self.tableView.scrollEnabled = YES;
         }
     }
 
     [self.tableView setHidden:self.contents == nil];
     [self.tableView reloadData];
+
+    if (items)
+    {
+        NSIndexPath *lastIndexPath = [NSIndexPath indexPathForRow:[items count]-1 inSection:0];
+        [self.tableView scrollToRowAtIndexPath:lastIndexPath
+                              atScrollPosition:UITableViewScrollPositionBottom
+                                      animated:NO];
+    }
 }
 
 #pragma mark - Table view data source -
