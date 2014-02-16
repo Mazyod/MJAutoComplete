@@ -98,7 +98,8 @@
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"autoCompleteString contains[cd] %@", string];
         [filteredList filterUsingPredicate:predicate];
     }
-    [_autoCompleteTC setContents:filteredList];
+
+    [_autoCompleteTC showAutoCompleteItems:filteredList reversed:self.isScrollDirectionReversed];
 }
 
 - (void)addAutoCompleteTrigger:(MJAutoCompleteTrigger *)trigger
