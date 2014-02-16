@@ -70,6 +70,10 @@ const CGFloat MJAutoCompleteTCCellHeight = 44.f;
             self.tableView.frame = frame;
             self.tableView.scrollEnabled = NO;
         }
+        else
+        {
+            self.tableView.frame = self.tableView.superview.frame;
+        }
     }
 
     [self.tableView setHidden:self.contents == nil];

@@ -129,7 +129,7 @@
         if (substring)
         {
             // let's inform the delegate and update the list
-             __weak MJAutoCompleteManager *weakSelf = self;
+            __weak MJAutoCompleteManager *weakSelf = self;
             MJAutoCompleteListCallback cb = ^(NSArray *list)
             {
                 [weakSelf _updateAutoCompleteList:list forTrigger:trigger withString:substring];
