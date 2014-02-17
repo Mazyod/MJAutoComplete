@@ -80,7 +80,7 @@ const CGFloat MJAutoCompleteTCCellHeight = 44.f;
     [self.tableView setHidden:self.contents == nil];
     [self.tableView reloadData];
     /* update after reloading the data */
-    if (items && reverse)
+    if ([items count] && reverse)
     {
         NSIndexPath *lastIndexPath = [NSIndexPath indexPathForRow:[items count]-1 inSection:0];
         [self.tableView scrollToRowAtIndexPath:lastIndexPath
