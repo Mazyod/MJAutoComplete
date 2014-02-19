@@ -50,8 +50,10 @@
             {
                 dlRange = NSMakeRange(0, 0);
             }
-
-            NSString* prevString = [weakSelf.processingString substringToIndex:NSMaxRange(dlRange)-delimiter.length];
+            /* If the autoCompleteString already has the delimiter, let's strip it */
+            NSInteger offset = [autoCompleteString hasPrefix:delimiter] ? delimiter.length : 0;
+            
+            NSString* prevString = [weakSelf.processingString substringToIndex:NSMaxRange(dlRange)-offset];
             NSString* newString = [NSString stringWithFormat:@"%@%@ ", prevString, autoCompleteString];
             
             [weakSelf.delegate autoCompleteManager:weakSelf shouldUpdateToText:newString];

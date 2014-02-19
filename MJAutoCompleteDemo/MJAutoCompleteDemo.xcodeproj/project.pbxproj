@@ -27,6 +27,7 @@
 		8289755118B3707400A5E2D2 /* MJAutoCompleteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8289754918B3707400A5E2D2 /* MJAutoCompleteManager.m */; };
 		8289755218B3707400A5E2D2 /* MJAutoCompleteTC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8289754B18B3707400A5E2D2 /* MJAutoCompleteTC.m */; };
 		8289755318B3707400A5E2D2 /* MJAutoCompleteTrigger.m in Sources */ = {isa = PBXBuildFile; fileRef = 8289754D18B3707400A5E2D2 /* MJAutoCompleteTrigger.m */; };
+		8289755518B4737200A5E2D2 /* Countries.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8289755418B4737200A5E2D2 /* Countries.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +71,7 @@
 		8289754B18B3707400A5E2D2 /* MJAutoCompleteTC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJAutoCompleteTC.m; sourceTree = "<group>"; };
 		8289754C18B3707400A5E2D2 /* MJAutoCompleteTrigger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJAutoCompleteTrigger.h; sourceTree = "<group>"; };
 		8289754D18B3707400A5E2D2 /* MJAutoCompleteTrigger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJAutoCompleteTrigger.m; sourceTree = "<group>"; };
+		8289755418B4737200A5E2D2 /* Countries.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Countries.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 				8289751F18B36FE700A5E2D2 /* Main.storyboard */,
 				8289752218B36FE700A5E2D2 /* MDViewController.h */,
 				8289752318B36FE700A5E2D2 /* MDViewController.m */,
+				8289755418B4737200A5E2D2 /* Countries.plist */,
 				8289752518B36FE700A5E2D2 /* Images.xcassets */,
 				8289751418B36FE700A5E2D2 /* Supporting Files */,
 			);
@@ -269,6 +272,7 @@
 				8289752618B36FE700A5E2D2 /* Images.xcassets in Resources */,
 				8289751818B36FE700A5E2D2 /* InfoPlist.strings in Resources */,
 				8289752118B36FE700A5E2D2 /* Main.storyboard in Resources */,
+				8289755518B4737200A5E2D2 /* Countries.plist in Resources */,
 				8289754E18B3707400A5E2D2 /* AutoCompleteCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

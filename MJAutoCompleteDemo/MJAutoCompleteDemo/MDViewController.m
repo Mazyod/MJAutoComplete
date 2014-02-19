@@ -28,8 +28,11 @@
         self.autoCompleteMgr.dataSource = self;
         self.autoCompleteMgr.delegate = self;
         /* Add some autoComplete triggers */
-        NSArray *items = @[@"sample", @"hashtags", @"things", @"more_things", @"jingle", @"neat", @"lorem", @"random"];
+        // let's get the names of the countries
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"Countries" ofType:@"plist"];
+        NSArray *items = [[NSArray arrayWithContentsOfFile:path] valueForKey:@"name"];
         items = [MJAutoCompleteItem autoCompleteCellModelFromStrings:items];
+        // then assign them to the trigger
         MJAutoCompleteTrigger *trigger = [[MJAutoCompleteTrigger alloc] initWithDelimiter:@"#"
                                                                         autoCompleteItems:items];
         
