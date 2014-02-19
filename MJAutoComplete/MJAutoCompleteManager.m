@@ -28,6 +28,7 @@
     self = [super init];
     if (self)
     {
+        self.customAutoCompleteCell = Nil;
         self.triggerSet = [NSMutableSet setWithCapacity:5];
         /* we are retaining the tableViewController, so it shouldn't retain us */
         __weak MJAutoCompleteManager *weakSelf = self;
@@ -45,15 +46,17 @@
             NSString* autoCompleteString = selectedItem.autoCompleteString;
             NSString* delimiter = weakSelf.currentTrigger.delimiter;
             
-            NSRange dlRange = [weakSelf.processingString rangeOfString:delimiter options:NSBackwardsSearch];
+            NSRange dlRange = [weakSelf.processingString rangeOfString:delimiter
+                                                               options:NSBackwardsSearch];
             if (!delimiter.length)
             {
                 dlRange = NSMakeRange(0, 0);
             }
             /* If the autoCompleteString already has the delimiter, let's strip it */
             NSInteger offset = [autoCompleteString hasPrefix:delimiter] ? delimiter.length : 0;
+            NSInteger index = NSMaxRange(dlRange) - offset;
             
-            NSString* prevString = [weakSelf.processingString substringToIndex:NSMaxRange(dlRange)-offset];
+            NSString* prevString = [weakSelf.processingString substringToIndex:index];
             NSString* newString = [NSString stringWithFormat:@"%@%@ ", prevString, autoCompleteString];
             
             [weakSelf.delegate autoCompleteManager:weakSelf shouldUpdateToText:newString];
@@ -61,7 +64,8 @@
             [weakSelf processString:newString];
         };
         
-        _autoCompleteTC = [[MJAutoCompleteTC alloc] initWithDisplayHandler:display selectionHandler:selection];
+        _autoCompleteTC = [[MJAutoCompleteTC alloc] initWithDisplayHandler:display
+                                                          selectionHandler:selection];
     }
     return self;
 }
@@ -75,14 +79,17 @@
 - (void)setContainer:(UIView *)container
 {
     _container = container;
-    // NOTE: Don't use container.bounds
-    CGRect bounds = container.frame;
-    bounds.origin = CGPointZero;
+
+    [self.autoCompleteTC.tableView removeFromSuperview];
+    [self.autoCompleteTC.tableView setFrame:container.bounds];
     
-    [self.autoCompleteTC.view removeFromSuperview];
-    [self.autoCompleteTC.view setFrame:bounds];
-    
-    [container addSubview:self.autoCompleteTC.view];
+    [container addSubview:self.autoCompleteTC.tableView];
+}
+/* Override to pass a message to the tableView */
+- (void)setCustomAutoCompleteCell:(Class)customAutoCompleteCell
+{
+    [self.autoCompleteTC.tableView registerClass:customAutoCompleteCell
+                          forCellReuseIdentifier:@"CustomAutoCompleteCell"];
 }
 
 /* Update the AutoCompleteItems list with new items using the dataSource to filter, or apply simple filter */

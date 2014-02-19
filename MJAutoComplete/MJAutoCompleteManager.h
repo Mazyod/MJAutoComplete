@@ -87,6 +87,8 @@ typedef void(^MJAutoCompleteListCallback)(NSArray* list);
 @property (weak, nonatomic) IBOutlet id<MJAutoCompleteManagerDelegate> delegate;
 /* The container must be set so the auto complete manager knows where to position it's table view. The table view will have an autoresizing mask of flexible width | flexible height to change with the container. */
 @property (weak, nonatomic) IBOutlet UIView* container;
+/* You can provide an MJAutoCompleteCell subclass for customization purposes */
+@property (nonatomic) Class customAutoCompleteCell;
 
 /**** COMPONENT CUSTOMIZATION ****/
 /* Only for checking what triggers were added. Use -addAutoCompleteDelimiter: and removeAutoCompleteDelimiter: to indirectly manipulate the array */

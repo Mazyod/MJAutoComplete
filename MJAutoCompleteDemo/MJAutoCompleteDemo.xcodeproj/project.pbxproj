@@ -21,13 +21,13 @@
 		8289752F18B36FE700A5E2D2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8289751118B36FE700A5E2D2 /* UIKit.framework */; };
 		8289753718B36FE700A5E2D2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8289753518B36FE700A5E2D2 /* InfoPlist.strings */; };
 		8289753918B36FE700A5E2D2 /* MJAutoCompleteDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8289753818B36FE700A5E2D2 /* MJAutoCompleteDemoTests.m */; };
-		8289754E18B3707400A5E2D2 /* AutoCompleteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8289754318B3707400A5E2D2 /* AutoCompleteCell.xib */; };
 		8289754F18B3707400A5E2D2 /* MJAutoCompleteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8289754518B3707400A5E2D2 /* MJAutoCompleteCell.m */; };
 		8289755018B3707400A5E2D2 /* MJAutoCompleteItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8289754718B3707400A5E2D2 /* MJAutoCompleteItem.m */; };
 		8289755118B3707400A5E2D2 /* MJAutoCompleteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8289754918B3707400A5E2D2 /* MJAutoCompleteManager.m */; };
 		8289755218B3707400A5E2D2 /* MJAutoCompleteTC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8289754B18B3707400A5E2D2 /* MJAutoCompleteTC.m */; };
 		8289755318B3707400A5E2D2 /* MJAutoCompleteTrigger.m in Sources */ = {isa = PBXBuildFile; fileRef = 8289754D18B3707400A5E2D2 /* MJAutoCompleteTrigger.m */; };
 		8289755518B4737200A5E2D2 /* Countries.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8289755418B4737200A5E2D2 /* Countries.plist */; };
+		8289755A18B4782800A5E2D2 /* MDCustomAutoCompleteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8289755918B4782800A5E2D2 /* MDCustomAutoCompleteCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,7 +60,6 @@
 		8289753418B36FE700A5E2D2 /* MJAutoCompleteDemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MJAutoCompleteDemoTests-Info.plist"; sourceTree = "<group>"; };
 		8289753618B36FE700A5E2D2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8289753818B36FE700A5E2D2 /* MJAutoCompleteDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MJAutoCompleteDemoTests.m; sourceTree = "<group>"; };
-		8289754318B3707400A5E2D2 /* AutoCompleteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoCompleteCell.xib; sourceTree = "<group>"; };
 		8289754418B3707400A5E2D2 /* MJAutoCompleteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJAutoCompleteCell.h; sourceTree = "<group>"; };
 		8289754518B3707400A5E2D2 /* MJAutoCompleteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJAutoCompleteCell.m; sourceTree = "<group>"; };
 		8289754618B3707400A5E2D2 /* MJAutoCompleteItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJAutoCompleteItem.h; sourceTree = "<group>"; };
@@ -72,6 +71,8 @@
 		8289754C18B3707400A5E2D2 /* MJAutoCompleteTrigger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJAutoCompleteTrigger.h; sourceTree = "<group>"; };
 		8289754D18B3707400A5E2D2 /* MJAutoCompleteTrigger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJAutoCompleteTrigger.m; sourceTree = "<group>"; };
 		8289755418B4737200A5E2D2 /* Countries.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Countries.plist; sourceTree = "<group>"; };
+		8289755818B4782800A5E2D2 /* MDCustomAutoCompleteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDCustomAutoCompleteCell.h; sourceTree = "<group>"; };
+		8289755918B4782800A5E2D2 /* MDCustomAutoCompleteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDCustomAutoCompleteCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +138,8 @@
 				8289751F18B36FE700A5E2D2 /* Main.storyboard */,
 				8289752218B36FE700A5E2D2 /* MDViewController.h */,
 				8289752318B36FE700A5E2D2 /* MDViewController.m */,
+				8289755818B4782800A5E2D2 /* MDCustomAutoCompleteCell.h */,
+				8289755918B4782800A5E2D2 /* MDCustomAutoCompleteCell.m */,
 				8289755418B4737200A5E2D2 /* Countries.plist */,
 				8289752518B36FE700A5E2D2 /* Images.xcassets */,
 				8289751418B36FE700A5E2D2 /* Supporting Files */,
@@ -176,7 +179,6 @@
 		8289754218B3707400A5E2D2 /* MJAutoComplete */ = {
 			isa = PBXGroup;
 			children = (
-				8289754318B3707400A5E2D2 /* AutoCompleteCell.xib */,
 				8289754418B3707400A5E2D2 /* MJAutoCompleteCell.h */,
 				8289754518B3707400A5E2D2 /* MJAutoCompleteCell.m */,
 				8289754618B3707400A5E2D2 /* MJAutoCompleteItem.h */,
@@ -273,7 +275,6 @@
 				8289751818B36FE700A5E2D2 /* InfoPlist.strings in Resources */,
 				8289752118B36FE700A5E2D2 /* Main.storyboard in Resources */,
 				8289755518B4737200A5E2D2 /* Countries.plist in Resources */,
-				8289754E18B3707400A5E2D2 /* AutoCompleteCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +301,7 @@
 				8289752418B36FE700A5E2D2 /* MDViewController.m in Sources */,
 				8289751E18B36FE700A5E2D2 /* MDAppDelegate.m in Sources */,
 				8289755318B3707400A5E2D2 /* MJAutoCompleteTrigger.m in Sources */,
+				8289755A18B4782800A5E2D2 /* MDCustomAutoCompleteCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

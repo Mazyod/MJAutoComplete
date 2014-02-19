@@ -18,6 +18,7 @@
 - (void)setAutoCompleteItem:(MJAutoCompleteItem *)autoCompleteItem
 {
     [self.autoCompleteItem removeObserver:self forKeyPath:@"image"];
+    
     _autoCompleteItem = autoCompleteItem;
     // the image may not be readily available
     [autoCompleteItem addObserver:self

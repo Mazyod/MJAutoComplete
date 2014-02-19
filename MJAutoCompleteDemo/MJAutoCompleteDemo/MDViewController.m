@@ -7,6 +7,7 @@
 //
 
 #import "MDViewController.h"
+#import "MDCustomAutoCompleteCell.h"
 
 @interface MDViewController ()
 
@@ -44,6 +45,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    // assign our custom cell
+    self.autoCompleteMgr.customAutoCompleteCell = [MDCustomAutoCompleteCell class];
     // hook up the container with the manager
     self.autoCompleteMgr.container = self.autoCompleteContainer;
     // and hook up the textView delegate

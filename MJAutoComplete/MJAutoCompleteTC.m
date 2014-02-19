@@ -98,9 +98,15 @@ const CGFloat MJAutoCompleteTCCellHeight = 44.f;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    static NSString *CustomIdentifier = @"CustomAutoCompleteCell";
     static NSString *CellIdentifier = @"AutoCompleteCell";
-    MJAutoCompleteCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier
-                                                               forIndexPath:indexPath];
+    
+    MJAutoCompleteCell *cell = [tableView dequeueReusableCellWithIdentifier:CustomIdentifier];
+    
+    if (!cell)
+    {
+        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    }
     
     MJAutoCompleteItem* item = self.contents[indexPath.row];
     if (self.displayHandler)
