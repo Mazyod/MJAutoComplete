@@ -14,10 +14,10 @@
 + (NSArray *)autoCompleteCellModelFromStrings:(NSArray *)strings
 {
     NSMutableArray* items = [NSMutableArray arrayWithCapacity:[strings count]];
-    for (NSString *string in strings)
+    for (id obj in strings)
     {
         MJAutoCompleteItem* item = [[self alloc] init];
-        item.autoCompleteString = string;
+        item.autoCompleteString = [obj description];
         
         [items addObject:item];
     }
