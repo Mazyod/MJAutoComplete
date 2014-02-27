@@ -104,7 +104,7 @@
     }
     else
     {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"autoCompleteString contains[cd] %@", string];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"autoCompleteString beginswith[cd] %@", string];
         [filteredList filterUsingPredicate:predicate];
     }
 
