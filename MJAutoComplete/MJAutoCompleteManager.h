@@ -91,10 +91,12 @@ typedef void(^MJAutoCompleteListCallback)(NSArray* list);
 @property (nonatomic) Class customAutoCompleteCell;
 
 /**** COMPONENT CUSTOMIZATION ****/
+/* Context set by the component owner, and can be accessed by the delegate/datasource for custom action */
+@property (strong, nonatomic) NSDictionary *context;
 /* Only for checking what triggers were added. Use -addAutoCompleteDelimiter: and removeAutoCompleteDelimiter: to indirectly manipulate the array */
 @property (readonly, nonatomic) NSSet* triggers;
 /* Ability to reverse autocomplete table scroll direction */
-@property (nonatomic, getter=isScrollDirectionReversed) BOOL scrollDirectionReversed;
+@property (getter=isScrollDirectionReversed, nonatomic) BOOL scrollDirectionReversed;
 /* Use explicit methods to add and remove delimiters to enforce type checking and protect the internal mutable array. */
 - (void)addAutoCompleteTrigger:(MJAutoCompleteTrigger *)trigger;
 - (void)removeAutoCompleteTrigger:(MJAutoCompleteTrigger *)trigger;
