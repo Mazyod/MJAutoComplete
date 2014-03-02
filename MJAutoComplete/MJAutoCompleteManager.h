@@ -29,10 +29,10 @@ typedef void(^MJAutoCompleteListCallback)(NSArray* list);
                    callback:(MJAutoCompleteListCallback)callback;
 
 /* After the list is retrieved from the dataSource, it is sent back again to the dataSource to be filtered using whichever algorithm the dataSource prefers. If not implemented, it defaults to simple string matching the list retrieved with the captured string */
-- (NSArray *)autoCompleteManager:(MJAutoCompleteManager *)acManager
-                      filterList:(NSMutableArray *)list
-                      forTrigger:(MJAutoCompleteTrigger *)trigger
-                      withString:(NSString *)string;
+- (void)autoCompleteManager:(MJAutoCompleteManager *)acManager
+                 filterList:(NSMutableArray *)list
+                 forTrigger:(MJAutoCompleteTrigger *)trigger
+                 withString:(NSString *)string;
 
 @end
 
