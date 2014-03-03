@@ -1,0 +1,3 @@
+[submodule "External/AsyncImageView"]
+	path = External/AsyncImageView
+	url = git@github.com:nicklockwood/AsyncImageView.git
