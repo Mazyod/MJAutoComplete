@@ -33,11 +33,16 @@
         NSString *path = [[NSBundle mainBundle] pathForResource:@"Countries" ofType:@"plist"];
         NSArray *items = [[NSArray arrayWithContentsOfFile:path] valueForKey:@"name"];
         items = [MJAutoCompleteItem autoCompleteCellModelFromStrings:items];
+        [items setValue:@"http://placehold.it/150x150" forKey:@"imageURL"];
         // then assign them to the trigger
-        MJAutoCompleteTrigger *trigger = [[MJAutoCompleteTrigger alloc] initWithDelimiter:@"#"
-                                                                        autoCompleteItems:items];
+        MJAutoCompleteTrigger *hashTrigger = [[MJAutoCompleteTrigger alloc] initWithDelimiter:@"#"
+                                                                            autoCompleteItems:items];
         
-        [self.autoCompleteMgr addAutoCompleteTrigger:trigger];
+        MJAutoCompleteTrigger *atTrigger = [[MJAutoCompleteTrigger alloc] initWithDelimiter:@"@"
+                                                                          autoCompleteItems:items];
+        
+        [self.autoCompleteMgr addAutoCompleteTrigger:hashTrigger];
+        [self.autoCompleteMgr addAutoCompleteTrigger:atTrigger];
     }
     return self;
 }
