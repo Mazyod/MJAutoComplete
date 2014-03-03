@@ -8,8 +8,9 @@
 
 #import "MJAutoCompleteManager.h"
 #import "MJAutoCompleteTC.h"
+#import "MJAutoCompleteCell.h"
 
-@interface MJAutoCompleteManager ()
+@interface MJAutoCompleteManager () <MJAutoCompleteTCDelegate>
 
 /* keep a track of the currently processed string and delimiter. The string is the whole text sent by the developer. Accessed by the handler block. */
 @property (strong, nonatomic) NSString* processingString;
@@ -30,42 +31,8 @@
     {
         self.customAutoCompleteCell = Nil;
         self.triggerSet = [NSMutableSet setWithCapacity:5];
-        /* we are retaining the tableViewController, so it shouldn't retain us */
-        __weak MJAutoCompleteManager *weakSelf = self;
-        /* Optionally inform the delegate when an item is about to be displayed. */
-        MJAutoCompleteTCSelectionHandler display = ^(MJAutoCompleteItem *displayItem)
-        {
-            if ([weakSelf.delegate respondsToSelector:@selector(autoCompleteManager:willPresentItem:)])
-            {
-                [weakSelf.delegate autoCompleteManager:weakSelf willPresentItem:displayItem];
-            }
-        };
-        /* send the new string, with the replaced autoComplete string, back to the user */
-        MJAutoCompleteTCSelectionHandler selection = ^(MJAutoCompleteItem *selectedItem)
-        {
-            NSString* autoCompleteString = selectedItem.autoCompleteString;
-            NSString* delimiter = weakSelf.currentTrigger.delimiter;
-            
-            NSRange dlRange = [weakSelf.processingString rangeOfString:delimiter
-                                                               options:NSBackwardsSearch];
-            if (!delimiter.length)
-            {
-                dlRange = NSMakeRange(0, 0);
-            }
-            /* If the autoCompleteString already has the delimiter, let's strip it */
-            NSInteger offset = [autoCompleteString hasPrefix:delimiter] ? delimiter.length : 0;
-            NSInteger index = NSMaxRange(dlRange) - offset;
-            
-            NSString* prevString = [weakSelf.processingString substringToIndex:index];
-            NSString* newString = [NSString stringWithFormat:@"%@%@ ", prevString, autoCompleteString];
-            
-            [weakSelf.delegate autoCompleteManager:weakSelf shouldUpdateToText:newString];
-            // process new string:
-            [weakSelf processString:newString];
-        };
         
-        _autoCompleteTC = [[MJAutoCompleteTC alloc] initWithDisplayHandler:display
-                                                          selectionHandler:selection];
+        _autoCompleteTC = [[MJAutoCompleteTC alloc] initWithDelegate:self];
     }
     return self;
 }
@@ -85,7 +52,7 @@
     
     [container addSubview:self.autoCompleteTC.tableView];
 }
-/* Override to pass a message to the tableView */
+/* Override to pass a message to the tableView and enforce subclass */
 - (void)setCustomAutoCompleteCell:(Class)customAutoCompleteCell
 {
     [self.autoCompleteTC.tableView registerClass:customAutoCompleteCell
@@ -177,5 +144,42 @@
         [_autoCompleteTC showAutoCompleteItems:nil reversed:NO];
     }
 }
+
+#pragma mark - MJAutoCompleteTC Delegate Methods
+/* Optionally inform the delegate when an item is about to be displayed. */
+- (void)autoCompleteTableController:(MJAutoCompleteTC *)acTableController
+                    willPresentCell:(MJAutoCompleteCell *)cell
+{
+    if ([self.delegate respondsToSelector:@selector(autoCompleteManager:willPresentCell:)])
+    {
+        [self.delegate autoCompleteManager:self willPresentCell:cell];
+    }
+}
+/* send the new string, with the replaced autoComplete string, back to the user */
+- (void)autoCompleteTableController:(MJAutoCompleteTC *)acTableController
+                      didSelectItem:(MJAutoCompleteItem *)selectedItem
+{
+    NSString* autoCompleteString = selectedItem.autoCompleteString;
+    NSString* delimiter = self.currentTrigger.delimiter;
+    
+    NSRange dlRange = [self.processingString rangeOfString:delimiter
+                                                   options:NSBackwardsSearch];
+    if (!delimiter.length)
+    {
+        dlRange = NSMakeRange(0, 0);
+    }
+    /* If the autoCompleteString already has the delimiter, let's strip it */
+    NSInteger offset = [autoCompleteString hasPrefix:delimiter] ? delimiter.length : 0;
+    NSInteger index = NSMaxRange(dlRange) - offset;
+    
+    NSString* prevString = [self.processingString substringToIndex:index];
+    NSString* newString = [NSString stringWithFormat:@"%@%@ ", prevString, autoCompleteString];
+    
+    [self.delegate autoCompleteManager:self shouldUpdateToText:newString];
+    // process new string:
+    [self processString:newString];
+}
+
+#pragma mark -
 
 @end

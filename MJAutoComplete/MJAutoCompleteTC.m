@@ -11,23 +11,14 @@
 
 const CGFloat MJAutoCompleteTCCellHeight = 44.f;
 
-@interface MJAutoCompleteTC ()
-
-@property (copy, nonatomic) MJAutoCompleteTCDisplayHandler displayHandler;
-@property (copy, nonatomic) MJAutoCompleteTCSelectionHandler selectionHandler;
-
-@end
-
 @implementation MJAutoCompleteTC
 
-- (instancetype)initWithDisplayHandler:(MJAutoCompleteTCDisplayHandler)display
-                      selectionHandler:(MJAutoCompleteTCSelectionHandler)selection
+- (instancetype)initWithDelegate:(id<MJAutoCompleteTCDelegate>)delegate
 {
     self = [super init];
     if (self)
     {
-        self.displayHandler = display;
-        self.selectionHandler = selection;
+        self.delegate = delegate;
     }
     return self;
 }
@@ -100,19 +91,16 @@ const CGFloat MJAutoCompleteTCCellHeight = 44.f;
 {
     static NSString *CustomIdentifier = @"CustomAutoCompleteCell";
     static NSString *CellIdentifier = @"AutoCompleteCell";
-    
+    /* Check if the user has provided us with a custom cell */
     MJAutoCompleteCell *cell = [tableView dequeueReusableCellWithIdentifier:CustomIdentifier];
-    
+    /* if not, just use our default cell */
     if (!cell)
     {
         cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     }
     
     MJAutoCompleteItem* item = self.contents[indexPath.row];
-    if (self.displayHandler)
-    {
-        self.displayHandler(item);
-    }
+    [self.delegate autoCompleteTableController:self willPresentCell:cell];
     
     [cell setAutoCompleteItem:item];
     
@@ -123,10 +111,7 @@ const CGFloat MJAutoCompleteTCCellHeight = 44.f;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.selectionHandler)
-    {
-        self.selectionHandler(self.contents[indexPath.row]);
-    }
+    [self.delegate autoCompleteTableController:self didSelectItem:self.contents[indexPath.row]];
 }
 
 @end

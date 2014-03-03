@@ -11,10 +11,10 @@
 @implementation MJAutoCompleteItem
 @synthesize displayedString = _displayedString;
 
-+ (NSArray *)autoCompleteCellModelFromStrings:(NSArray *)strings
++ (NSArray *)autoCompleteCellModelFromObjects:(NSArray *)objs
 {
-    NSMutableArray* items = [NSMutableArray arrayWithCapacity:[strings count]];
-    for (id obj in strings)
+    NSMutableArray* items = [NSMutableArray arrayWithCapacity:[objs count]];
+    for (id obj in objs)
     {
         MJAutoCompleteItem* item = [[self alloc] init];
         item.autoCompleteString = [obj description];
@@ -32,6 +32,11 @@
         return self.autoCompleteString;
     }
     return _displayedString;
+}
+
+- (NSString *)description
+{
+    return self.autoCompleteString;
 }
 
 @end

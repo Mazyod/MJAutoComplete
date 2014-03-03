@@ -9,17 +9,25 @@
 @import UIKit;
 #import "MJAutoCompleteItem.h"
 
-/* In order to simplify the message passing between the manager and the TC, we simply define block handlers when an item will be presented and when an item is selected */
+@class MJAutoCompleteTC, MJAutoCompleteCell;
 
-typedef void(^MJAutoCompleteTCDisplayHandler)(MJAutoCompleteItem *displayedItem);
-typedef void(^MJAutoCompleteTCSelectionHandler)(MJAutoCompleteItem *selectedItem);
+@protocol MJAutoCompleteTCDelegate <NSObject>
+
+- (void)autoCompleteTableController:(MJAutoCompleteTC *)acTableController
+                    willPresentCell:(MJAutoCompleteCell *)cell;
+
+- (void)autoCompleteTableController:(MJAutoCompleteTC *)acTableController
+                      didSelectItem:(MJAutoCompleteItem *)selectedItem;
+
+@end
 
 @interface MJAutoCompleteTC : UITableViewController
 /* The contents of this table view is expected to be an array of MJAutoCompleteItems */
 @property (readonly, nonatomic) NSArray* contents;
 
-- (instancetype)initWithDisplayHandler:(MJAutoCompleteTCDisplayHandler)display
-                      selectionHandler:(MJAutoCompleteTCSelectionHandler)selection;
+@property (weak, nonatomic) id<MJAutoCompleteTCDelegate> delegate;
+
+- (instancetype)initWithDelegate:(id<MJAutoCompleteTCDelegate>)delegate;
 
 - (void)showAutoCompleteItems:(NSArray *)items reversed:(BOOL)reverse;
 

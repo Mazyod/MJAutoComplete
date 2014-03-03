@@ -8,6 +8,7 @@
 
 #import "MDViewController.h"
 #import "MDCustomAutoCompleteCell.h"
+#import "UIImageView+WebCache.h"
 
 @interface MDViewController ()
 
@@ -31,9 +32,9 @@
         /* Add some autoComplete triggers */
         // let's get the names of the countries
         NSString *path = [[NSBundle mainBundle] pathForResource:@"Countries" ofType:@"plist"];
-        NSArray *items = [[NSArray arrayWithContentsOfFile:path] valueForKey:@"name"];
-        items = [MJAutoCompleteItem autoCompleteCellModelFromStrings:items];
-        [items setValue:@"http://placehold.it/150x150" forKey:@"imageURL"];
+        NSArray *names = [[NSArray arrayWithContentsOfFile:path] valueForKey:@"name"];
+        NSArray *items = [MJAutoCompleteItem autoCompleteCellModelFromObjects:names];
+
         // then assign them to the trigger
         MJAutoCompleteTrigger *hashTrigger = [[MJAutoCompleteTrigger alloc] initWithDelimiter:@"#"
                                                                             autoCompleteItems:items];
@@ -58,7 +59,7 @@
     self.textView.delegate = self;
 }
 
-#pragma mark - UITextView delegate methods -
+#pragma mark - UITextView Delegate methods -
 
 - (void)textViewDidChange:(UITextView *)textView
 {
@@ -67,9 +68,16 @@
 
 #pragma mark - MJAutoCompleteMgr Delegate methods -
 
+- (void)autoCompleteManager:(MJAutoCompleteManager *)acManager willPresentCell:(id)autoCompleteCell
+{
+    MDCustomAutoCompleteCell *cell = autoCompleteCell;
+    [cell.imageView setImageWithURL:[NSURL URLWithString:@"http://placehold.it/150x150"]
+                   placeholderImage:[UIImage imageNamed:@"placeholder"]];
+}
+
 - (void)autoCompleteManager:(MJAutoCompleteManager *)acManager shouldUpdateToText:(NSString *)newText
 {
-    [self.textView setText:newText];
+    self.textView.text = newText;
 }
 
 @end
