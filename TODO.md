@@ -8,4 +8,5 @@
 + Should probably pass the tableView to the user the first time a trigger appears (and remove trigger.cellClass/cellNIB)
 + Raise exception or handle gracefully if the user sent an array of strings for the component.
 + explore linking the autoCompleteMgr to the user through KVO.
-+ Write a better README.
++ ~~Write a better README.~~
++ Write a demo walk through.

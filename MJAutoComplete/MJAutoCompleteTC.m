@@ -13,6 +13,16 @@
 static NSString *MJAutoCompleteCellReuseIdentifier = @"AutoCompleteCell";
 static const CGFloat MJAutoCompleteTCCellHeight = 44.f;
 
+@interface MJAutoCompleteTC ()
+
+@property (weak, nonatomic) id<MJAutoCompleteTCDelegate> delegate;
+/* The contents of this table view is expected to be an array of MJAutoCompleteItems */
+@property (readonly, nonatomic) NSArray* contents;
+/* Height of a cell, retreived from the NIB, or +[MJAutoCompleteCell height] */
+@property (nonatomic) CGFloat cellHeight;
+
+@end
+
 @implementation MJAutoCompleteTC
 
 - (instancetype)initWithDelegate:(id<MJAutoCompleteTCDelegate>)delegate
@@ -38,18 +48,27 @@ static const CGFloat MJAutoCompleteTCCellHeight = 44.f;
 
 - (void)showAutoCompleteItems:(NSArray *)items reversed:(BOOL)reverse
 {
-    /* Resolve the trigger parameter */
+    /* Resolve the trigger parameter and cellHeight */
+    self.cellHeight = [MJAutoCompleteCell height];
     MJAutoCompleteTrigger *trigger = self.delegate.currentTrigger;
     if (trigger.cell)
     {
         if ([[NSBundle mainBundle] pathForResource:trigger.cell ofType:@"nib"])
         {
             UINib *nib = [UINib nibWithNibName:trigger.cell bundle:nil];
+            /* attempt to retreive the height of the cell */
+            NSArray *objects = [nib instantiateWithOwner:nil options:nil];
+            NSAssert([objects count] == 1, @"The Cell NIB %@ has more than one object!", trigger.cell);
+            self.cellHeight = CGRectGetHeight([objects[0] bounds]);
+            
             [self.tableView registerNib:nib forCellReuseIdentifier:trigger.cell];
         }
         else
         {
             Class cls = NSClassFromString(trigger.cell);
+            NSAssert([cls isSubclassOfClass:[MJAutoCompleteCell class]], @"%@ must be MJAutoCompleteCell subclass", trigger.cell);
+            self.cellHeight = [cls height];
+            
             [self.tableView registerClass:cls forCellReuseIdentifier:trigger.cell];
         }
     }
@@ -101,6 +120,11 @@ static const CGFloat MJAutoCompleteTCCellHeight = 44.f;
 }
 
 #pragma mark - Table view data source
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return self.cellHeight;
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {

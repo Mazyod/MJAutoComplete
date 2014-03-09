@@ -12,6 +12,8 @@
 
 @interface MDViewController ()
 
+@property (nonatomic) BOOL didStartDownload;
+
 @property (strong, nonatomic) MJAutoCompleteManager *autoCompleteMgr;
 
 @property (weak, nonatomic) IBOutlet UIView *autoCompleteContainer;
@@ -36,12 +38,12 @@
         NSArray *items = [MJAutoCompleteItem autoCompleteCellModelFromObjects:names];
 
         // then assign them to the trigger
+        /* For the # trigger, we demonstrate the absolute easiest way to get started */
         MJAutoCompleteTrigger *hashTrigger = [[MJAutoCompleteTrigger alloc] initWithDelimiter:@"#"
                                                                             autoCompleteItems:items];
-        
-        MJAutoCompleteTrigger *atTrigger = [[MJAutoCompleteTrigger alloc] initWithDelimiter:@"@"
-                                                                          autoCompleteItems:items
-                                                                                       cell:@"MDCustomAutoCompleteCell"];
+        /* For the @ trigger, it is much more complex, with lots of async thingies */
+        MJAutoCompleteTrigger *atTrigger = [[MJAutoCompleteTrigger alloc] initWithDelimiter:@"@"];
+        atTrigger.cell = @"MDCustomAutoCompleteCell";
         // assign them triggers to autoCompleteMgr
         [self.autoCompleteMgr addAutoCompleteTrigger:hashTrigger];
         [self.autoCompleteMgr addAutoCompleteTrigger:atTrigger];
@@ -65,6 +67,58 @@
     [self.autoCompleteMgr processString:textView.text];
 }
 
+#pragma mark - MJAutoCompleteMgr DataSource Methods
+
+- (void)autoCompleteManager:(MJAutoCompleteManager *)acManager
+         itemListForTrigger:(MJAutoCompleteTrigger *)trigger
+                 withString:(NSString *)string
+                   callback:(MJAutoCompleteListCallback)callback
+{
+    /* Since we implemented this method, we are stuck and must handle ALL triggers */
+    // the # trigger is trivial:
+    if ([trigger.delimiter isEqual:@"#"])
+    {
+        // we already provided the list
+        callback(trigger.autoCompleteItemList);
+    }
+    else if ([trigger.delimiter isEqual:@"@"])
+    {
+        if (!self.didStartDownload)
+        {
+            self.didStartDownload = YES;
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
+            {
+                NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://alltheragefaces.com/api/all/faces"]];
+                NSArray *jsonData = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                
+                NSMutableArray *itemList = [NSMutableArray array];
+                for (NSDictionary *dict in jsonData)
+                {
+                    // Use DICT_GET to handle NSNull cases
+                    NSString * acString = DICT_GET(dict, @"title");
+                    acString = [acString stringByReplacingOccurrencesOfString:@" " withString:@""];
+                    
+                    MJAutoCompleteItem *item = [[MJAutoCompleteItem alloc] init];
+                    item.autoCompleteString = acString;
+                    item.context = dict;
+                    
+                    [itemList addObject:item];
+                }
+                
+                dispatch_async(dispatch_get_main_queue(), ^
+                {
+                    trigger.autoCompleteItemList = itemList;
+                    callback(itemList);
+                });
+            });
+        }
+        else
+        {
+            callback(trigger.autoCompleteItemList);
+        }
+    }
+}
+
 #pragma mark - MJAutoCompleteMgr Delegate methods
 
 - (void)autoCompleteManager:(MJAutoCompleteManager *)acManager
@@ -74,7 +128,9 @@
     if ([trigger.delimiter isEqual:@"@"])
     {
         MDCustomAutoCompleteCell *cell = autoCompleteCell;
-        [cell.avatarImageView setImageWithURL:[NSURL URLWithString:@"http://placehold.it/150x150"]
+        NSDictionary *context = cell.autoCompleteItem.context;
+        
+        [cell.avatarImageView setImageWithURL:[NSURL URLWithString:DICT_GET(context, @"jpg")]
                              placeholderImage:[UIImage imageNamed:@"placeholder"]];
     }
 }

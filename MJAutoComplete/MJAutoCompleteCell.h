@@ -11,5 +11,7 @@
 @interface MJAutoCompleteCell : UITableViewCell
 
 @property (strong, nonatomic) MJAutoCompleteItem *autoCompleteItem;
+/* You can customize the tableView height through subclassing */
++ (CGFloat)height;
 
 @end

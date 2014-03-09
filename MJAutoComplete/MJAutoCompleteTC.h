@@ -24,10 +24,6 @@
 @end
 
 @interface MJAutoCompleteTC : UITableViewController
-/* The contents of this table view is expected to be an array of MJAutoCompleteItems */
-@property (readonly, nonatomic) NSArray* contents;
-
-@property (weak, nonatomic) id<MJAutoCompleteTCDelegate> delegate;
 
 - (instancetype)initWithDelegate:(id<MJAutoCompleteTCDelegate>)delegate;
 

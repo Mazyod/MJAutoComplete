@@ -12,6 +12,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *subtitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *viewsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *censoredLabel;
 
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 

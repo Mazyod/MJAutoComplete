@@ -21,8 +21,12 @@
     super.autoCompleteItem = autoCompleteItem;
     /* Superclass will set the text label to displayString, we don't want that. */
     self.textLabel.hidden = YES;
-    self.titleLabel.text = autoCompleteItem.displayedString;
-    self.subtitleLabel.text = autoCompleteItem.autoCompleteString;
+    
+    NSDictionary *context = autoCompleteItem.context;
+    self.titleLabel.text = DICT_GET(context, @"title");
+    self.subtitleLabel.text = DICT_GET(context, @"emotion");
+    self.viewsLabel.text = [DICT_GET(context, @"views") description];
+    self.censoredLabel.hidden = ![DICT_GET(context, @"is_censored") boolValue];
 }
 
 @end

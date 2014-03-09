@@ -1,6 +1,18 @@
 # MJAutoComplete
 
-A ~~simple~~ slightly-complex drop-in for using an autocomplete component on iOS. It comes with a simple demo app that should help you get started in a jiffy!
+A simple drop-in for using an autocomplete component on iOS. It comes with a simple demo app that should help you get started in a jiffy!
+
+![demo-picture](http://i.imgur.com/ddIm9Fq.png)
+
+## Outline
+
++ **[How It Works](#how-it-works)**: The scary innards and plumbings.
++ **[How To Use](#how-to-use)**: tl;dr ppl go there. Now.
++ **[Gotchas](#gotchas)**: **IMPORTANT**, please read before taking Aspirin.
++ **[Demo Walk-through](#demo-walk-through)**: The demo is pretty extensive! Read to make the most out of this component.
++ **[Dependencies](#dependencies)**: Libraries required for this to work.
++ **[Challenges](#challenges)**: Meh, remarks.
++ **[Special Thanks](#special-thanks)**: Hall of Fame.
 
 ## How It Works
 
@@ -61,6 +73,10 @@ At this point, the user either enters a character that hides the autoComplete ta
 	- If you are loading from a nib, set the reuse identifier in the NIB to the subclass name.
 	- Assign the subclass string to the corresponding trigger, and it will try to load a nib, and if it can't find one, will simply register the class with the tableView `-[UITableView registerClass:NSClassFromString(...) ...]`.
 
+
+## Demo Walk-through
+
+####*UNDER CONSTRUCTION*
 
 ## Dependencies
 

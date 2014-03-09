@@ -10,6 +10,11 @@
 
 @implementation MJAutoCompleteCell
 
++ (CGFloat)height
+{
+    return 44.f;
+}
+
 - (void)setAutoCompleteItem:(MJAutoCompleteItem *)autoCompleteItem
 {
     _autoCompleteItem = autoCompleteItem;

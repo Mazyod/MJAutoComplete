@@ -14,3 +14,5 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
 #endif
+
+#define DICT_GET(_dict_, _key_) _dict_[_key_] == [NSNull null] ? @"" : _dict_[_key_]
