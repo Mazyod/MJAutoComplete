@@ -8,7 +8,7 @@ A simple drop-in for using an autocomplete component on iOS. It comes with a sim
 
 + **[How It Works](#how-it-works)**: The scary innards and plumbings.
 + **[How To Use](#how-to-use)**: tl;dr ppl go there. Now.
-+ **[Gotchas](#gotchas)**: **IMPORTANT**, please read before taking Aspirin.
++ **[Gotchas](#gotchas-important)**: **IMPORTANT**, please read before taking Aspirin.
 + **[Demo Walk-through](#demo-walk-through)**: The demo is pretty extensive! Read to make the most out of this component.
 + **[Dependencies](#dependencies)**: Libraries required for this to work.
 + **[Challenges](#challenges)**: Meh, remarks.
@@ -97,3 +97,4 @@ The final adapted solution was to remove the thumbnail support *completely*. Ins
 ## Special Thanks
 
 + The awesome [SDWebImage component](https://github.com/rs/SDWebImage), used for demo purpose only.
++ [alltheragefaces.com](http://alltheragefaces.com/), imagine how our examples would suck without these services.
