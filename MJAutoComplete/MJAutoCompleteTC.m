@@ -42,7 +42,7 @@ static const CGFloat MJAutoCompleteTCCellHeight = 44.f;
     MJAutoCompleteTrigger *trigger = self.delegate.currentTrigger;
     if (trigger.cell)
     {
-        if ([[NSBundle mainBundle] pathForResource:trigger.cell ofType:@"xib"])
+        if ([[NSBundle mainBundle] pathForResource:trigger.cell ofType:@"nib"])
         {
             UINib *nib = [UINib nibWithNibName:trigger.cell bundle:nil];
             [self.tableView registerNib:nib forCellReuseIdentifier:trigger.cell];
