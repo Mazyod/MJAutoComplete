@@ -117,9 +117,9 @@ static const CGFloat MJAutoCompleteTCCellHeight = 44.f;
     }
     
     MJAutoCompleteItem* item = self.contents[indexPath.row];
-    [self.delegate autoCompleteTableController:self willPresentCell:cell];
-    
     [cell setAutoCompleteItem:item];
+    
+    [self.delegate autoCompleteTableController:self willPresentCell:cell];
     
     return cell;
 }

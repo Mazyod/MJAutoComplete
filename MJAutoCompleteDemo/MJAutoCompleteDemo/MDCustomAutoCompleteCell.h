@@ -10,4 +10,9 @@
 
 @interface MDCustomAutoCompleteCell : MJAutoCompleteCell
 
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *subtitleLabel;
+
+@property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
+
 @end

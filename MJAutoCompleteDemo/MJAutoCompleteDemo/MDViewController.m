@@ -36,7 +36,6 @@
         NSArray *items = [MJAutoCompleteItem autoCompleteCellModelFromObjects:names];
 
         // then assign them to the trigger
-        [MDCustomAutoCompleteCell class];
         MJAutoCompleteTrigger *hashTrigger = [[MJAutoCompleteTrigger alloc] initWithDelimiter:@"#"
                                                                             autoCompleteItems:items];
         
@@ -75,8 +74,8 @@
     if ([trigger.delimiter isEqual:@"@"])
     {
         MDCustomAutoCompleteCell *cell = autoCompleteCell;
-        [cell.imageView setImageWithURL:[NSURL URLWithString:@"http://placehold.it/150x150"]
-                       placeholderImage:[UIImage imageNamed:@"placeholder"]];
+        [cell.avatarImageView setImageWithURL:[NSURL URLWithString:@"http://placehold.it/150x150"]
+                             placeholderImage:[UIImage imageNamed:@"placeholder"]];
     }
 }
 
