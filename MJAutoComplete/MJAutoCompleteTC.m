@@ -8,8 +8,10 @@
 
 #import "MJAutoCompleteTC.h"
 #import "MJAutoCompleteCell.h"
+#import "MJAutoCompleteTrigger.h"
 
-const CGFloat MJAutoCompleteTCCellHeight = 44.f;
+static NSString *MJAutoCompleteCellReuseIdentifier = @"AutoCompleteCell";
+static const CGFloat MJAutoCompleteTCCellHeight = 44.f;
 
 @implementation MJAutoCompleteTC
 
@@ -28,7 +30,7 @@ const CGFloat MJAutoCompleteTCCellHeight = 44.f;
     [super viewDidLoad];
     
     [self.tableView setBackgroundColor:[UIColor whiteColor]];
-    [self.tableView registerClass:[MJAutoCompleteCell class] forCellReuseIdentifier:@"AutoCompleteCell"];
+    [self.tableView registerClass:[MJAutoCompleteCell class] forCellReuseIdentifier:MJAutoCompleteCellReuseIdentifier];
     [self.tableView setHidden:self.contents == nil];
     // make sure the table view fits the container
     [self.tableView setAutoresizingMask:(UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth)];
@@ -36,6 +38,23 @@ const CGFloat MJAutoCompleteTCCellHeight = 44.f;
 
 - (void)showAutoCompleteItems:(NSArray *)items reversed:(BOOL)reverse
 {
+    /* Resolve the trigger parameter */
+    MJAutoCompleteTrigger *trigger = self.delegate.currentTrigger;
+    if (trigger.cell)
+    {
+        UINib *nib = [UINib nibWithNibName:trigger.cell bundle:nil];
+        if (nib)
+        {
+            [self.tableView registerNib:nib forCellReuseIdentifier:trigger.cell];
+        }
+        else
+        {
+            Class cls = NSClassFromString(trigger.cell);
+            [self.tableView registerClass:cls forCellReuseIdentifier:trigger.cell];
+        }
+    }
+    
+    /* Resolve the reverse parameter */
     if (!reverse)
     {
         _contents = items;
@@ -50,7 +69,7 @@ const CGFloat MJAutoCompleteTCCellHeight = 44.f;
         }
         _contents = reversed;
         /* Then, let's adjust the tableView */
-        /* 1 - if the frame of the table is smaller than the container, position it at the bottom */
+        /* if the frame of the table is smaller than the container, position it at the bottom and disable scrolling */
         CGFloat contentHeight = MJAutoCompleteTCCellHeight * [items count];
         if (contentHeight < CGRectGetHeight(self.tableView.superview.bounds))
         {
@@ -68,6 +87,7 @@ const CGFloat MJAutoCompleteTCCellHeight = 44.f;
         }
     }
 
+    /* resolve the items parameter set to self.contents */
     [self.tableView setHidden:self.contents == nil];
     [self.tableView reloadData];
     /* update after reloading the data */
@@ -80,23 +100,20 @@ const CGFloat MJAutoCompleteTCCellHeight = 44.f;
     }
 }
 
-#pragma mark - Table view data source -
+#pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_contents count];
+    return [self.contents count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CustomIdentifier = @"CustomAutoCompleteCell";
-    static NSString *CellIdentifier = @"AutoCompleteCell";
-    /* Check if the user has provided us with a custom cell */
-    MJAutoCompleteCell *cell = [tableView dequeueReusableCellWithIdentifier:CustomIdentifier];
-    /* if not, just use our default cell */
+    MJAutoCompleteCell *cell = [tableView dequeueReusableCellWithIdentifier:self.delegate.currentTrigger.cell];
     if (!cell)
     {
-        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        cell = [tableView dequeueReusableCellWithIdentifier:MJAutoCompleteCellReuseIdentifier];
+        NSAssert(cell, @"Cell couldn't be instantiated for identifier: %@", MJAutoCompleteCellReuseIdentifier);
     }
     
     MJAutoCompleteItem* item = self.contents[indexPath.row];
@@ -107,11 +124,13 @@ const CGFloat MJAutoCompleteTCCellHeight = 44.f;
     return cell;
 }
 
-#pragma mark - Table view delegate methods -
+#pragma mark - Table view delegate methods
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.delegate autoCompleteTableController:self didSelectItem:self.contents[indexPath.row]];
 }
+
+#pragma mark -
 
 @end

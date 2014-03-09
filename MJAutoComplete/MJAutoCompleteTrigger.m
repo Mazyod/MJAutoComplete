@@ -15,13 +15,19 @@
     return [self initWithDelimiter:delimiter autoCompleteItems:nil];
 }
 
-- (instancetype)initWithDelimiter:(NSString *)delimiter autoCompleteItems:(NSArray *)items
+- (instancetype)initWithDelimiter:(NSString *)delimiter autoCompleteItems:(NSArray*)items;
+{
+    return [self initWithDelimiter:delimiter autoCompleteItems:items cell:nil];
+}
+
+- (instancetype)initWithDelimiter:(NSString *)delimiter autoCompleteItems:(NSArray *)items cell:(NSString *)cell
 {
     self = [super init];
     if (self)
     {
         self.delimiter = delimiter;
         self.autoCompleteItemList = items;
+        self.cell = cell;
     }
     return self;
 }

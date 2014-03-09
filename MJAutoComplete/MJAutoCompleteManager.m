@@ -14,7 +14,6 @@
 
 /* keep a track of the currently processed string and delimiter. The string is the whole text sent by the developer. Accessed by the handler block. */
 @property (strong, nonatomic) NSString* processingString;
-@property (strong, nonatomic) MJAutoCompleteTrigger* currentTrigger;
 /* The delimiters that would trigger an autoComplete cycle */
 @property (strong, nonatomic) NSMutableSet *triggerSet;
 /* The tableViewController associated with displaying the autoCompleteItems */
@@ -23,13 +22,13 @@
 @end
 
 @implementation MJAutoCompleteManager
+@synthesize currentTrigger = _currentTrigger;
 
 - (id)init
 {
     self = [super init];
     if (self)
     {
-        self.customAutoCompleteCell = Nil;
         self.triggerSet = [NSMutableSet setWithCapacity:5];
         
         _autoCompleteTC = [[MJAutoCompleteTC alloc] initWithDelegate:self];
@@ -52,13 +51,6 @@
     
     [container addSubview:self.autoCompleteTC.tableView];
 }
-/* Override to pass a message to the tableView and enforce subclass */
-- (void)setCustomAutoCompleteCell:(Class)customAutoCompleteCell
-{
-    [self.autoCompleteTC.tableView registerClass:customAutoCompleteCell
-                          forCellReuseIdentifier:@"CustomAutoCompleteCell"];
-}
-
 /* Update the AutoCompleteItems list with new items using the dataSource to filter, or apply simple filter */
 - (void)_updateAutoCompleteList:(NSArray *)list forTrigger:(MJAutoCompleteTrigger *)trigger withString:(NSString *)string
 {
@@ -150,9 +142,9 @@
 - (void)autoCompleteTableController:(MJAutoCompleteTC *)acTableController
                     willPresentCell:(MJAutoCompleteCell *)cell
 {
-    if ([self.delegate respondsToSelector:@selector(autoCompleteManager:willPresentCell:)])
+    if ([self.delegate respondsToSelector:@selector(autoCompleteManager:willPresentCell:forTrigger:)])
     {
-        [self.delegate autoCompleteManager:self willPresentCell:cell];
+        [self.delegate autoCompleteManager:self willPresentCell:cell forTrigger:self.currentTrigger];
     }
 }
 /* send the new string, with the replaced autoComplete string, back to the user */

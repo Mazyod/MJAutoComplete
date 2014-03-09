@@ -45,7 +45,8 @@ typedef void(^MJAutoCompleteListCallback)(NSArray* list);
 @optional
 /** For the sake of lazy loading, we notify the delegate when an autoComplete cell will be presented, so the developer can postpone fetching the image until the cell is actually going to be presented to the user. **/
 - (void)autoCompleteManager:(MJAutoCompleteManager *)acManager
-            willPresentCell:(id)autoCompleteCell;
+            willPresentCell:(id)autoCompleteCell
+                 forTrigger:(MJAutoCompleteTrigger *)trigger;
 /** Additional delegate methods when the autoComplete view will (dis)appear. **/
 - (void)autoCompleteManagerViewWillAppear:(MJAutoCompleteManager *)acManager;
 - (void)autoCompleteManagerViewWillDisappear:(MJAutoCompleteManager *)acManager;
@@ -87,8 +88,6 @@ typedef void(^MJAutoCompleteListCallback)(NSArray* list);
 @property (weak, nonatomic) IBOutlet id<MJAutoCompleteManagerDelegate> delegate;
 /** The container must be set so the auto complete manager knows where to position it's table view. The table view will have an autoresizing mask of flexible width | flexible height to change with the container. **/
 @property (weak, nonatomic) IBOutlet UIView* container;
-/** You can provide an MJAutoCompleteCell subclass for customization purposes **/
-@property (nonatomic) Class customAutoCompleteCell;
 
 /*=== COMPONENT CUSTOMIZATION ===*/
 /** Context set by the component owner, and can be accessed by the delegate/datasource for custom action **/

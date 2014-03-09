@@ -8,16 +8,26 @@
 
 #import "MDCustomAutoCompleteCell.h"
 
+@interface MDCustomAutoCompleteCell ()
+
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *subtitleLabel;
+
+@property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
+
+@end
+
 @implementation MDCustomAutoCompleteCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+/* override the setter to assign the subtitle label */
+- (void)setAutoCompleteItem:(MJAutoCompleteItem *)autoCompleteItem
 {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self)
-    {
-        self.textLabel.font = [UIFont boldSystemFontOfSize:20];
-    }
-    return self;
+    // I bet you didn't know this was possible :p
+    super.autoCompleteItem = autoCompleteItem;
+    /* Superclass will set the text label to displayString, we don't want that. */
+    self.textLabel.hidden = YES;
+    self.titleLabel.text = autoCompleteItem.displayedString;
+    self.subtitleLabel.text = autoCompleteItem.autoCompleteString;
 }
 
 @end

@@ -9,9 +9,11 @@
 @import UIKit;
 #import "MJAutoCompleteItem.h"
 
-@class MJAutoCompleteTC, MJAutoCompleteCell;
+@class MJAutoCompleteTC, MJAutoCompleteCell, MJAutoCompleteTrigger;
 
 @protocol MJAutoCompleteTCDelegate <NSObject>
+
+@property (strong, nonatomic) MJAutoCompleteTrigger* currentTrigger;
 
 - (void)autoCompleteTableController:(MJAutoCompleteTC *)acTableController
                     willPresentCell:(MJAutoCompleteCell *)cell;

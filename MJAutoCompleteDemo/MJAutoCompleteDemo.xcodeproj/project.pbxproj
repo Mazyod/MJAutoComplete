@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		82619D3918CC853100D1DA15 /* MDCustomAutoCompleteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82619D3818CC853100D1DA15 /* MDCustomAutoCompleteCell.xib */; };
 		8289750E18B36FE700A5E2D2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8289750D18B36FE700A5E2D2 /* Foundation.framework */; };
 		8289751018B36FE700A5E2D2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8289750F18B36FE700A5E2D2 /* CoreGraphics.framework */; };
 		8289751218B36FE700A5E2D2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8289751118B36FE700A5E2D2 /* UIKit.framework */; };
@@ -56,6 +57,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		82619D3818CC853100D1DA15 /* MDCustomAutoCompleteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MDCustomAutoCompleteCell.xib; sourceTree = "<group>"; };
 		8289750A18B36FE700A5E2D2 /* MJAutoCompleteDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MJAutoCompleteDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8289750D18B36FE700A5E2D2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8289750F18B36FE700A5E2D2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -186,6 +188,7 @@
 				8289752318B36FE700A5E2D2 /* MDViewController.m */,
 				8289755818B4782800A5E2D2 /* MDCustomAutoCompleteCell.h */,
 				8289755918B4782800A5E2D2 /* MDCustomAutoCompleteCell.m */,
+				82619D3818CC853100D1DA15 /* MDCustomAutoCompleteCell.xib */,
 				828C1DCB18C4BD2D00E9BB00 /* placeholder.png */,
 				8289755418B4737200A5E2D2 /* Countries.plist */,
 				8289752518B36FE700A5E2D2 /* Images.xcassets */,
@@ -369,6 +372,7 @@
 				8289752118B36FE700A5E2D2 /* Main.storyboard in Resources */,
 				828C1DCC18C4BD2D00E9BB00 /* placeholder.png in Resources */,
 				8289755518B4737200A5E2D2 /* Countries.plist in Resources */,
+				82619D3918CC853100D1DA15 /* MDCustomAutoCompleteCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

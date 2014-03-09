@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-/*
+/**
     CLASS DESCRIPTION:
     ==================
         
@@ -36,16 +36,20 @@
     string will be fetched based on the WHOLE string. Hence, we get:
     "You are a great Zombie".
  
- */
+ **/
 
 @interface MJAutoCompleteTrigger : NSObject
-/* the delimiter that will activate the trigger */
+/** the delimiter that will activate the trigger **/
 @property (copy, nonatomic) NSString *delimiter;
-/* an optional autoCompleteItem array that would automatically be used for this trigger, if the dataSource doesn't implement itemListForTrigger */
+/** an optional autoCompleteItem array that would automatically be used for this trigger, if the dataSource doesn't implement itemListForTrigger **/
 @property (copy, nonatomic) NSArray *autoCompleteItemList;
+/** assign the cusotm cell class OR nib, NOT BOTH!! (allows different triggers show different cells) **/
+@property (strong, nonatomic) NSString *cell;
 
+/* I am a big fan of providing the user with multiple signatures, to save them as much typing as possible */
 - (instancetype)initWithDelimiter:(NSString *)delimiter;
 - (instancetype)initWithDelimiter:(NSString *)delimiter autoCompleteItems:(NSArray*)items;
+- (instancetype)initWithDelimiter:(NSString *)delimiter autoCompleteItems:(NSArray*)items cell:(NSString *)cell;
 
 /* get the string that fires this trigger, or nil if none */
 - (NSString *)substringToBeAutoCompletedInString:(NSString *)string;

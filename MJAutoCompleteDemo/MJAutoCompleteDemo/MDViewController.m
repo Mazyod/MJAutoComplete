@@ -36,12 +36,14 @@
         NSArray *items = [MJAutoCompleteItem autoCompleteCellModelFromObjects:names];
 
         // then assign them to the trigger
+        [MDCustomAutoCompleteCell class];
         MJAutoCompleteTrigger *hashTrigger = [[MJAutoCompleteTrigger alloc] initWithDelimiter:@"#"
                                                                             autoCompleteItems:items];
         
         MJAutoCompleteTrigger *atTrigger = [[MJAutoCompleteTrigger alloc] initWithDelimiter:@"@"
-                                                                          autoCompleteItems:items];
-        
+                                                                          autoCompleteItems:items
+                                                                                       cell:@"MDCustomAutoCompleteCell"];
+        // assign them triggers to autoCompleteMgr
         [self.autoCompleteMgr addAutoCompleteTrigger:hashTrigger];
         [self.autoCompleteMgr addAutoCompleteTrigger:atTrigger];
     }
@@ -51,8 +53,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // assign our custom cell
-    self.autoCompleteMgr.customAutoCompleteCell = [MDCustomAutoCompleteCell class];
     // hook up the container with the manager
     self.autoCompleteMgr.container = self.autoCompleteContainer;
     // and hook up the textView delegate
@@ -68,11 +68,16 @@
 
 #pragma mark - MJAutoCompleteMgr Delegate methods -
 
-- (void)autoCompleteManager:(MJAutoCompleteManager *)acManager willPresentCell:(id)autoCompleteCell
+- (void)autoCompleteManager:(MJAutoCompleteManager *)acManager
+            willPresentCell:(id)autoCompleteCell
+                 forTrigger:(MJAutoCompleteTrigger *)trigger
 {
-    MDCustomAutoCompleteCell *cell = autoCompleteCell;
-    [cell.imageView setImageWithURL:[NSURL URLWithString:@"http://placehold.it/150x150"]
-                   placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    if ([trigger.delimiter isEqual:@"@"])
+    {
+        MDCustomAutoCompleteCell *cell = autoCompleteCell;
+        [cell.imageView setImageWithURL:[NSURL URLWithString:@"http://placehold.it/150x150"]
+                       placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    }
 }
 
 - (void)autoCompleteManager:(MJAutoCompleteManager *)acManager shouldUpdateToText:(NSString *)newText
