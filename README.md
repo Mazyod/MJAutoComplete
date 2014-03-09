@@ -44,7 +44,7 @@ Finally, an optional message is sent to the delegate that the AutoComplete table
 
 This process actually takes place everytime the user types more stuff, even if the AutoComplete table is already displayed. This allows the developer to implement heuristics, such as autoCorrection or something. 
 
-##### DISPLAYING THE ITEMS
+##### DISPLAYING THEM ITEMS
 
 The `MJAutoCompleteTC` (where TC stands for TableViewController) simply dequeues a reusable cell and assigns it with the `MJAutoCompleteItem` for that row to the cell. before returning the cell to the table view, the controller sends a message to the manager, which in turn calls the optional selector on the delegate `autoCompleteManager:willPresentCell:forTrigger:`. This is intended for developers who would like to load data just when the cell is presented (i.e. avatars).
 
