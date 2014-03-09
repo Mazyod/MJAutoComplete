@@ -53,7 +53,7 @@ At this point, the user either enters a character that hides the autoComplete ta
 	- Finally, send the string you want to process using `-[MJAutoCompleteManager processString:]`!
 
 
-## Gotchas <span style="color: #F00">*IMPORANTANT!*</span>
+## Gotchas *IMPORTANT!*
 
 + When sending the list of autoComplete items to the component, make sure it's an array of `MJAutoCompleteItem`s!! Use `[MJAutoCompleteItem autoCompleteCellModelFromStrings:myObjectArray]` if necessary. This will return an `MJAutoCompleteItem` array by passing the `-[NSObject description]` message to all the items in the array.
 
