@@ -58,14 +58,14 @@
     self.textView.delegate = self;
 }
 
-#pragma mark - UITextView Delegate methods -
+#pragma mark - UITextView Delegate methods
 
 - (void)textViewDidChange:(UITextView *)textView
 {
     [self.autoCompleteMgr processString:textView.text];
 }
 
-#pragma mark - MJAutoCompleteMgr Delegate methods -
+#pragma mark - MJAutoCompleteMgr Delegate methods
 
 - (void)autoCompleteManager:(MJAutoCompleteManager *)acManager
             willPresentCell:(id)autoCompleteCell
@@ -83,5 +83,7 @@
 {
     self.textView.text = newText;
 }
+
+#pragma mark -
 
 @end
