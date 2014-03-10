@@ -59,7 +59,7 @@ static const CGFloat MJAutoCompleteTCCellHeight = 44.f;
             /* attempt to retreive the height of the cell */
             NSArray *objects = [nib instantiateWithOwner:nil options:nil];
             NSAssert([objects count] == 1, @"The Cell NIB %@ has more than one object!", trigger.cell);
-            self.cellHeight = CGRectGetHeight([objects[0] bounds]);
+            self.cellHeight = CGRectGetHeight([(UIView *)objects[0] bounds]);
             
             [self.tableView registerNib:nib forCellReuseIdentifier:trigger.cell];
         }
