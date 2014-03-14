@@ -97,4 +97,4 @@ The final adapted solution was to remove the thumbnail support *completely*. Ins
 ## Special Thanks
 
 + The awesome [SDWebImage component](https://github.com/rs/SDWebImage), used for demo purpose only.
-+ [alltheragefaces.com](http://alltheragefaces.com/), imagine how our examples would suck without these services.
++ [alltheragefaces.com](http://alltheragefaces.com/), imagine how much our examples would suck without these services.
