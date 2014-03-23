@@ -11,7 +11,6 @@
 #import "MJAutoCompleteTrigger.h"
 
 static NSString *MJAutoCompleteCellReuseIdentifier = @"AutoCompleteCell";
-static const CGFloat MJAutoCompleteTCCellHeight = 44.f;
 
 @interface MJAutoCompleteTC ()
 
@@ -89,7 +88,7 @@ static const CGFloat MJAutoCompleteTCCellHeight = 44.f;
         _contents = reversed;
         /* Then, let's adjust the tableView */
         /* if the frame of the table is smaller than the container, position it at the bottom and disable scrolling */
-        CGFloat contentHeight = MJAutoCompleteTCCellHeight * [items count];
+        CGFloat contentHeight = self.cellHeight * [items count];
         if (contentHeight < CGRectGetHeight(self.tableView.superview.bounds))
         {
             CGRect frame = self.tableView.frame;
