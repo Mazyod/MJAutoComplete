@@ -32,7 +32,7 @@ The top level object that you interact with mainly, is the `MJAutoCompleteManage
 
 ##### SENDING THE INPUT TO THE AUTOCOMPLETE MANAGER
 
-After initialization, you would send the whole string the user is typing to the AutoComplete manager through `processString:`. The manager will iterate over the triggers and check wether the input fires any of them.
+After initialization, you would send the whole string the user is typing to the AutoComplete manager through `processString:`. The manager will iterate over the triggers and check whether the input fires any of them.
 
 ##### UPON FIRING AN AUTOCOMPLETE TRIGGER
 
@@ -42,7 +42,7 @@ Immidiatly afte the manager gets the result of the trigger, it sends another opt
 
 Finally, an optional message is sent to the delegate that the AutoComplete table view will appear.
 
-This process actually takes place everytime the user types more stuff, even if the AutoComplete table is already displayed. This allows the developer to implement heuristics, such as autoCorrection or something. 
+This process actually takes place every time the user types more stuff, even if the AutoComplete table is already displayed. This allows the developer to implement heuristics, such as autoCorrection or something. 
 
 ##### DISPLAYING THEM ITEMS
 
@@ -58,8 +58,8 @@ At this point, the user either enters a character that hides the autoComplete ta
 + Add the `MJAutoComplete` folder located inside the repo into your project.
 + Write some code!!
 	- `#import "MJAutoCompleteManager.h"`
-	- Instanciate an instance of the manager, and assign the delegate and the optional dataSource.
-	- Instanciate a few `MJAutoCompleteTriggers` with a delimiter and a list of items (for testing).
+	- Instantiate an instance of the manager, and assign the delegate and the optional dataSource.
+	- Instantiate a few `MJAutoCompleteTriggers` with a delimiter and a list of items (for testing).
 	- Add the triggers to the `MJAutoCompleteManager` instance.
 	- When you have the container view for the AutoComplete component ready, assign the `MJAutoCompleteManager`'s `container` property to that container.
 	- Finally, send the string you want to process using `-[MJAutoCompleteManager processString:]`!
@@ -92,7 +92,7 @@ After a default very simple implementation that allowed the developer to lazily 
 
 #### Solution:
 
-The final adapted solution was to remove the thumbnail support *completely*. Instead, a feature was implemented that allowed the developer to subclass the `MJAutoCompleteCell`, hence customize the cell to their heart's content. The reason behind this approach is because I am from a school of thought that supports fine-grain maintainable/replacable components rather than a huge monolithic component that just tries to do everything.
+The final adapted solution was to remove the thumbnail support *completely*. Instead, a feature was implemented that allowed the developer to subclass the `MJAutoCompleteCell`, hence customize the cell to their heart's content. The reason behind this approach is because I am from a school of thought that supports fine-grain maintainable/replaceable components rather than a huge monolithic component that just tries to do everything.
 
 ## Special Thanks
 
