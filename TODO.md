@@ -10,3 +10,4 @@
 + explore linking the autoCompleteMgr to the user through KVO.
 + ~~Write a better README.~~
 + Write a demo walk through.
++ Mark init as unavailable in MJTrigger
