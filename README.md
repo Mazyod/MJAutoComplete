@@ -2,7 +2,7 @@
 
 A simple drop-in for using an autocomplete component on iOS. It comes with a simple demo app that should help you get started in a jiffy!
 
-![demo-picture](http://i.imgur.com/ddIm9Fq.png)
+![demo-picture](resources/MJAutoComplete-demo.gif)
 
 ## Outline
 
