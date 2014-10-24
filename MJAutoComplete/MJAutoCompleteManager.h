@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 ArabianDevs. All rights reserved.
 //
 
-@import UIKit;
+#import <UIKit/UIKit.h>
 #import "MJAutoCompleteItem.h"
 #import "MJAutoCompleteTrigger.h"
 
