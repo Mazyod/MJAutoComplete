@@ -168,13 +168,13 @@
     NSString* newString = [NSString stringWithFormat:@"%@%@ ", prevString, autoCompleteString];
     
     if ([self.delegate respondsToSelector:@selector(autoCompleteManager:shouldUpdateToText:selectedItem:)]) {
-        
         [self.delegate autoCompleteManager:self shouldUpdateToText:newString selectedItem:selectedItem];
-        
-    } else {
-     
+    } 
+    else if ([self.delegate respondsToSelector:@selector(autoCompleteManager:shouldUpdateToText:)])
+    {
         [self.delegate autoCompleteManager:self shouldUpdateToText:newString];
     }
+    
     // process new string:
     [self processString:newString];
 }
