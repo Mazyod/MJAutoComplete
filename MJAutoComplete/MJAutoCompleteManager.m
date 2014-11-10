@@ -167,11 +167,16 @@
     NSString* prevString = [self.processingString substringToIndex:index];
     NSString* newString = [NSString stringWithFormat:@"%@%@ ", prevString, autoCompleteString];
     
-    [self.delegate autoCompleteManager:self shouldUpdateToText:newString];
+    if ([self.delegate respondsToSelector:@selector(autoCompleteManager:shouldUpdateToText:selectedItem:)]) {
+        
+        [self.delegate autoCompleteManager:self shouldUpdateToText:newString selectedItem:selectedItem];
+        
+    } else {
+     
+        [self.delegate autoCompleteManager:self shouldUpdateToText:newString];
+    }
     // process new string:
     [self processString:newString];
 }
-
-#pragma mark -
 
 @end

@@ -43,6 +43,9 @@ typedef void(^MJAutoCompleteListCallback)(NSArray* list);
          shouldUpdateToText:(NSString *)newText;
 
 @optional
+- (void)autoCompleteManager:(MJAutoCompleteManager *)acManager
+         shouldUpdateToText:(NSString *)newText
+               selectedItem:(MJAutoCompleteItem *)selectedItem;
 /** For the sake of lazy loading, we notify the delegate when an autoComplete cell will be presented, so the developer can postpone fetching the image until the cell is actually going to be presented to the user. **/
 - (void)autoCompleteManager:(MJAutoCompleteManager *)acManager
             willPresentCell:(id)autoCompleteCell
