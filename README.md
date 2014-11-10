@@ -59,6 +59,7 @@ At this point, the user either enters a character that hides the autoComplete ta
 + Write some code!!
 	- `#import "MJAutoCompleteManager.h"`
 	- Instantiate an instance of the manager, and assign the delegate and the optional dataSource.
+	- The delegate must implement one of the `shouldUpdateText` methods from the protocol.
 	- Instantiate a few `MJAutoCompleteTriggers` with a delimiter and a list of items (for testing).
 	- Add the triggers to the `MJAutoCompleteManager` instance.
 	- When you have the container view for the AutoComplete component ready, assign the `MJAutoCompleteManager`'s `container` property to that container.
