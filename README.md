@@ -6,13 +6,36 @@ A simple drop-in for using an autocomplete component on iOS. It comes with a sim
 
 ## Outline
 
-+ **[How It Works](#how-it-works)**: The scary innards and plumbings.
 + **[How To Use](#how-to-use)**: tl;dr ppl go there. Now.
++ **[Running the Example](#running-the-example)**: Quick note on how to run the example.
++ **[How It Works](#how-it-works)**: The scary innards and plumbings.
 + **[Gotchas](#gotchas-important)**: **IMPORTANT**, please read before taking Aspirin.
 + **[Demo Walk-through](#demo-walk-through)**: The demo is pretty extensive! Read to make the most out of this component.
 + **[Dependencies](#dependencies)**: Libraries required for this to work.
 + **[Challenges](#challenges)**: Meh, remarks.
 + **[Special Thanks](#special-thanks)**: Hall of Fame.
+
+## How To Use
+
++ Get the repo in whichever way you like. I endorse submodules, but you are free to use whatever you like.
++ Add the `MJAutoComplete` folder located inside the repo into your project.
++ Write some code!!
+	- `#import "MJAutoCompleteManager.h"`
+	- Instantiate an instance of the manager, and assign the delegate and the optional dataSource.
+	- The delegate must implement one of the `shouldUpdateText` methods from the protocol.
+	- Instantiate a few `MJAutoCompleteTriggers` with a delimiter and a list of items (for testing).
+	- Add the triggers to the `MJAutoCompleteManager` instance.
+	- When you have the container view for the AutoComplete component ready, assign the `MJAutoCompleteManager`'s `container` property to that container.
+	- Finally, send the string you want to process using `-[MJAutoCompleteManager processString:]`!
+
+## Running the Example
+
+In order to run the example, please make sure you download all submodules. To do that, use [SourceTree](http://www.sourcetreeapp.com/), or if you are a terminal geek, do it as so:
+
+```bash
+$ cd /path/to/MJAutoComplete-repo
+$ git submodule update --init --recursive
+```
 
 ## How It Works
 
@@ -51,20 +74,6 @@ The `MJAutoCompleteTC` (where TC stands for TableViewController) simply dequeues
 ##### SELECTING AN AUTOCOMPLETE OPTION
 
 At this point, the user either enters a character that hides the autoComplete table, such as a whitespace, or they select an AutoComplete option (or they exit the app, or the app crashes, or...). If they select an option, the only required `MJAutoCompleteManagerDelegate` method is called, which is `-[autoCompleteManager:shouldUpdateToText:]`. The implementation of this method is typically to set the string passed by the manager as the new string of the component the user was typing in.
-
-## How To Use
-
-+ Get the repo in whichever way you like. I endorse submodules, but you are free to use whatever you like.
-+ Add the `MJAutoComplete` folder located inside the repo into your project.
-+ Write some code!!
-	- `#import "MJAutoCompleteManager.h"`
-	- Instantiate an instance of the manager, and assign the delegate and the optional dataSource.
-	- The delegate must implement one of the `shouldUpdateText` methods from the protocol.
-	- Instantiate a few `MJAutoCompleteTriggers` with a delimiter and a list of items (for testing).
-	- Add the triggers to the `MJAutoCompleteManager` instance.
-	- When you have the container view for the AutoComplete component ready, assign the `MJAutoCompleteManager`'s `container` property to that container.
-	- Finally, send the string you want to process using `-[MJAutoCompleteManager processString:]`!
-
 
 ## Gotchas *IMPORTANT!*
 
