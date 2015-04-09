@@ -90,7 +90,7 @@ At this point, the user either enters a character that hides the autoComplete ta
 
 ## Dependencies
 
-+ **NONE**. ([SDWebImage](https://github.com/rs/SDWebImage) is used for demoing purposes only.)
++ **NONE**.
 
 ## Challenges
 
@@ -106,5 +106,5 @@ The final adapted solution was to remove the thumbnail support *completely*. Ins
 
 ## Special Thanks
 
-+ The awesome [SDWebImage component](https://github.com/rs/SDWebImage), used for demo purpose only.
++ The awesome [Haneke](https://github.com/Haneke/Haneke), used for demo purpose only.
 + [alltheragefaces.com](http://alltheragefaces.com/), imagine how much our examples would suck without these services.

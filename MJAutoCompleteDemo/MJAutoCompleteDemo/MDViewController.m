@@ -8,7 +8,7 @@
 
 #import "MDViewController.h"
 #import "MDCustomAutoCompleteCell.h"
-#import "UIImageView+WebCache.h"
+#import "UIImageView+Haneke.h"
 
 @interface MDViewController ()
 
@@ -130,8 +130,8 @@
         MDCustomAutoCompleteCell *cell = autoCompleteCell;
         NSDictionary *context = cell.autoCompleteItem.context;
         
-        [cell.avatarImageView setImageWithURL:[NSURL URLWithString:DICT_GET(context, @"jpg")]
-                             placeholderImage:[UIImage imageNamed:@"placeholder"]];
+        [cell.avatarImageView hnk_setImageFromURL:[NSURL URLWithString:DICT_GET(context, @"jpg")]
+                                      placeholder:[UIImage imageNamed:@"placeholder"]];
     }
 }
 
