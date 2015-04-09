@@ -7,7 +7,6 @@ A simple drop-in for using an autocomplete component on iOS. It comes with a sim
 ## Outline
 
 + **[How To Use](#how-to-use)**: tl;dr ppl go there. Now.
-+ **[Running the Example](#running-the-example)**: Quick note on how to run the example.
 + **[How It Works](#how-it-works)**: The scary innards and plumbings.
 + **[Gotchas](#gotchas-important)**: **IMPORTANT**, please read before taking Aspirin.
 + **[Demo Walk-through](#demo-walk-through)**: The demo is pretty extensive! Read to make the most out of this component.
@@ -27,15 +26,6 @@ A simple drop-in for using an autocomplete component on iOS. It comes with a sim
 	- Add the triggers to the `MJAutoCompleteManager` instance.
 	- When you have the container view for the AutoComplete component ready, assign the `MJAutoCompleteManager`'s `container` property to that container.
 	- Finally, send the string you want to process using `-[MJAutoCompleteManager processString:]`!
-
-## Running the Example
-
-In order to run the example, please make sure you download all submodules. To do that, use [SourceTree](http://www.sourcetreeapp.com/), or if you are a terminal geek, do it as so:
-
-```bash
-$ cd /path/to/MJAutoComplete-repo
-$ git submodule update --init --recursive
-```
 
 ## How It Works
 
