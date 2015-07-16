@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "MJAutoComplete"
-  s.version      = "1.1.0"
+  s.version      = "1.1.1"
   s.summary      = "Simple drop-in for using autocomplete component on iOS."
 
   s.description  = <<-DESC
@@ -81,7 +81,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/Mazyod/MJAutoComplete.git", :tag => "1.1.0" }
+  s.source       = { :git => "https://github.com/Mazyod/MJAutoComplete.git", :tag => "1.1.1" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
