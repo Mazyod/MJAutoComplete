@@ -41,7 +41,7 @@
     }
 
     // make sure to search backwards, since that's where the user it typing
-    NSCharacterSet *breakSet = [[NSCharacterSet letterCharacterSet] invertedSet];
+    NSCharacterSet *breakSet = [[NSCharacterSet alphanumericCharacterSet] invertedSet];
     NSRange brRange = [string rangeOfCharacterFromSet:breakSet
                                               options:NSBackwardsSearch];
     
